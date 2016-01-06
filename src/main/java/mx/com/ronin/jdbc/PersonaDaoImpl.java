@@ -2,6 +2,8 @@ package mx.com.ronin.jdbc;
 
 import java.util.List;
 
+import javax.sql.DataSource;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
@@ -9,7 +11,6 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
-import sun.jdbc.odbc.ee.DataSource;
 
 @Repository
 public class PersonaDaoImpl implements PersonaDao {
@@ -52,7 +53,7 @@ public class PersonaDaoImpl implements PersonaDao {
 	public List<Persona> finAllPersonas() {
 		// TODO Auto-generated method stub
 		RowMapper<Persona> personaRowMapper = ParameterizedBeanPropertyRowMapper.newInstance(Persona.class);
-		return this.jdbcTemplate.query(SQL_SELECT_PERSONA_BY_ID, personaRowMapper);
+		return this.jdbcTemplate.query(SQL_SELECT_PERSONA, personaRowMapper);
 	}
 
 	public int contadorPersonasPorNombre(Persona persona) {
