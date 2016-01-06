@@ -16,36 +16,36 @@ import mx.com.ronin.jdbc.Persona;
 import mx.com.ronin.jdbc.PersonaDao;
 
 @RunWith(SpringJUnit4ClassRunner.class)
-@ContextConfiguration(locations={"classpath:datasource-test.xml", "classpath:applicationContext.xml"})
-public class TestPersonaDaoImpl {
+@ContextConfiguration(locations = { "classpath:datasource-test.xml", "classpath:applicationContext.xml" })
+public class TestPersonaDao {
 
 	private static Log logger = LogFactory.getLog("TestPersonaDaoImpl");
-	
+
 	@Autowired
 	private PersonaDao personaDao;
-	
+
 	@Test
-	public void testMostrarListaPersonas(){
+	public void testMostrarListaPersonas() {
 		try {
 			System.out.println();
 			logger.info("Iniciando test jdbc - Mostras lista personas");
-			
+
 			List<Persona> personas = personaDao.finAllPersonas();
 			int contadorPersonas = 0;
-			
+
 			for (Persona persona : personas) {
-				logger.info("Persona " +persona);
+				logger.info("Persona " + persona);
 				contadorPersonas++;
 			}
-			
+
 			assertEquals(contadorPersonas, personaDao.contadorPeronas());
 			logger.info("Fin del test JDBC - Mostrar lista personas");
-			
+
 		} catch (Exception e) {
 			// TODO: handle exception
-			logger.error("Error JDBC ",e);
+			logger.error("Error JDBC ", e);
 		}
-	
+
 	}
-	
+
 }
