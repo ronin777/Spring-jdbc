@@ -62,7 +62,8 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	public int contadorPeronas() {
 		// TODO Auto-generated method stub
-		return 0;
+		String sql = "SELECT count(*) FROM PERSONA";
+		return this.jdbcTemplate.queryForInt(sql);
 	}
 
 	public Persona getPersonaByEmail(Persona persona) {
