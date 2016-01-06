@@ -1,0 +1,2 @@
+insert into persona(nombre, ape_paterno, ape_materno, email) values ('admin', 'admin', '', 'admin@admin.com');
+insert into persona(nombre, ape_paterno, ape_materno, email) values ('Fredy R.', 'Vazquez', 'Geronimo', 'crazzy-rock@live.com.mx');
