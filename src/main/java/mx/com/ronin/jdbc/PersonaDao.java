@@ -16,7 +16,7 @@ public interface PersonaDao {
 
 	public int contadorPersonasPorNombre(Persona persona);
 
-	public int contadorPeronas();
+	public int contadorPersonas();
 
 	public Persona getPersonaByEmail(Persona persona);
 

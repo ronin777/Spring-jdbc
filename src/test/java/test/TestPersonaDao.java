@@ -40,7 +40,7 @@ public class TestPersonaDao {
 				contadorPersonas++;
 			}
 
-			assertEquals(contadorPersonas, personaDao.contadorPeronas());
+			assertEquals(contadorPersonas, personaDao.contadorPersonas());
 			logger.info("Fin del test JDBC - Mostrar lista personas");
 
 		} catch (Exception e) {
@@ -68,7 +68,7 @@ public class TestPersonaDao {
 			logger.error("Error jdbc", e);
 		}
 	}
-	
+
 	@Test
 	public void testEncontrarPersonaPorID(){
 		try {
@@ -79,6 +79,36 @@ public class TestPersonaDao {
 			assertEquals("admin", persona.getNombre());
 			logger.info("Persona recuperada ID: "+idPersona+" > "+persona);
 			logger.info("Fin del test encontrar Persona por ID");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Error jdbc", e);
+		}
+	}
+	@Test
+	public void testInsertarPersona(){
+		try {
+			System.out.println();
+			logger.info("Inicio de test insertar persona");
+			
+			assertEquals(2, personaDao.contadorPersonas());
+			
+			Persona persona = new Persona();
+			persona.setNombre("antonio");
+			persona.setApePaterno("Ake");
+			persona.setApeMaterno("garcia");
+			persona.setEmail("crazzyrock777@hotmail.com");
+			
+			personaDao.insertPersona(persona);
+			
+			//recuperamos la persona reciente ingresada
+			persona = personaDao.getPersonaByEmail(persona);
+			logger.info("Persona registrada: "+persona);
+			
+			//deberia ser 3 elementos en base de datos
+			assertEquals(3, personaDao.contadorPersonas());
+			
+			logger.info("Fin del test insertar persona");
 			
 		} catch (Exception e) {
 			// TODO: handle exception

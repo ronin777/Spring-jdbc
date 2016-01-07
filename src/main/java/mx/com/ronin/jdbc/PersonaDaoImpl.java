@@ -35,7 +35,8 @@ public class PersonaDaoImpl implements PersonaDao {
 	 
 	public void insertPersona(Persona persona) {
 		// TODO Auto-generated method stub
-		
+		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+		this.namedParameterJdbcTemplate.update(SQL_INSERT_PERSONA, parameterSource);
 	}
 
 	public void updatePersona(Persona persona) {
@@ -74,7 +75,7 @@ public class PersonaDaoImpl implements PersonaDao {
 		return this.namedParameterJdbcTemplate.queryForInt(sql, namedParameters);
 	}
 
-	public int contadorPeronas() {
+	public int contadorPersonas() {
 		// TODO Auto-generated method stub
 		String sql = "SELECT count(*) FROM PERSONA";
 		return this.jdbcTemplate.queryForInt(sql);
