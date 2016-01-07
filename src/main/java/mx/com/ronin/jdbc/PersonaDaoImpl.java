@@ -41,12 +41,14 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	public void updatePersona(Persona persona) {
 		// TODO Auto-generated method stub
-
+		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+		this.namedParameterJdbcTemplate.update(SQL_UPDATE_PERSONA, parameterSource);
 	}
 
 	public void deletePersona(Persona persona) {
 		// TODO Auto-generated method stub
-
+		SqlParameterSource parameterSource = new BeanPropertySqlParameterSource(persona);
+		this.namedParameterJdbcTemplate.update(SQL_DELETE_PERSONA, parameterSource);
 	}
 
 	public Persona findPersonaById(int idPersona) {

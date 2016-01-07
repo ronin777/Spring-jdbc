@@ -1,6 +1,6 @@
 package test;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 import java.util.List;
 
@@ -51,6 +51,7 @@ public class TestPersonaDao {
 	}
 
 	@Test
+	@Ignore
 	public void testContadorPorNombre(){
 		try {
 			System.out.println();
@@ -70,6 +71,7 @@ public class TestPersonaDao {
 	}
 
 	@Test
+	@Ignore
 	public void testEncontrarPersonaPorID(){
 		try {
 			System.out.println();
@@ -85,7 +87,9 @@ public class TestPersonaDao {
 			logger.error("Error jdbc", e);
 		}
 	}
+	
 	@Test
+	@Ignore
 	public void testInsertarPersona(){
 		try {
 			System.out.println();
@@ -109,6 +113,67 @@ public class TestPersonaDao {
 			assertEquals(3, personaDao.contadorPersonas());
 			
 			logger.info("Fin del test insertar persona");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Error jdbc", e);
+		}
+	}
+	
+	@Test
+	@Ignore
+	public void testActualizarPersona(){
+		try {
+			System.out.println();
+			logger.info("Inicio de test actualizar persona");
+			
+			int idPersona = 1;
+			Persona persona = personaDao.findPersonaById(idPersona);
+			logger.info("Persona a modificar : "+persona);
+			
+			persona.setNombre("Administrador");
+			
+			personaDao.updatePersona(persona);
+			//volvemos a buscar el registro
+			persona = personaDao.findPersonaById(idPersona);
+			assertEquals("Administrador", persona.getNombre());
+
+			logger.info("Persona  modificada : "+persona);
+			logger.info("Fin del test actualizar persona");
+			
+		} catch (Exception e) {
+			// TODO: handle exception
+			logger.error("Error jdbc", e);
+		}
+	}
+	
+	@Test
+	public void testEliminarPersona(){
+		try {
+			System.out.println();
+			logger.info("Inicio de test eliminar persona");
+			
+			int idPersona = 1;
+			Persona persona = personaDao.findPersonaById(idPersona);
+			logger.info("Persona a eliminar : "+persona);
+			
+			
+			
+			personaDao.deletePersona(persona);
+			//volvemos a buscar el registro
+			persona = personaDao.findPersonaById(idPersona);
+			assertNull(persona);
+
+			logger.info("Nuevo listado de Personas:");
+			
+			List<Persona> personas = personaDao.finAllPersonas();
+			int contador=0;
+			for (Persona persona2 : personas) {
+				logger.info("Persona: "+persona);
+				contador++;
+			}
+			assertEquals(contador, personaDao.contadorPersonas());
+			logger.info("Fin del test eliminar persona");
 			
 		} catch (Exception e) {
 			// TODO: handle exception
