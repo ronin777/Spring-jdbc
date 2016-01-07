@@ -7,7 +7,9 @@ import javax.sql.DataSource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.core.simple.ParameterizedBeanPropertyRowMapper;
 import org.springframework.stereotype.Repository;
 
@@ -58,7 +60,10 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	public int contadorPersonasPorNombre(Persona persona) {
 		// TODO Auto-generated method stub
-		return 0;
+		String sql = "SELECT count(*) FROM PERSONA WHERE nombre = :nombre";
+		
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(persona);
+		return this.namedParameterJdbcTemplate.queryForInt(sql, namedParameters);
 	}
 
 	public int contadorPeronas() {
