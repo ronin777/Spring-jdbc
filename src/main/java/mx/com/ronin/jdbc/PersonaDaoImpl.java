@@ -82,7 +82,10 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	public Persona getPersonaByEmail(Persona persona) {
 		// TODO Auto-generated method stub
-		return null;
+		String sql = "SELECT * FROM PERSONA WHERE email = :email";
+		
+		SqlParameterSource namedParameters = new BeanPropertySqlParameterSource(persona);
+		return this.namedParameterJdbcTemplate.queryForObject(sql, namedParameters, new PersonaRowMapper());
 	}
 
 }
