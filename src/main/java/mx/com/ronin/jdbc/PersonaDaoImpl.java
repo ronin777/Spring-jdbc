@@ -5,6 +5,7 @@ import java.util.List;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.BeanPropertySqlParameterSource;
@@ -49,7 +50,14 @@ public class PersonaDaoImpl implements PersonaDao {
 
 	public Persona findPersonaById(int idPersona) {
 		// TODO Auto-generated method stub
-		return null;
+		Persona persona=null;
+		try {
+			persona=jdbcTemplate.queryForObject(SQL_SELECT_PERSONA_BY_ID, new PersonaRowMapper(), idPersona);
+		} catch (EmptyResultDataAccessException e) {
+			// TODO: handle exception
+			persona=null;
+		}
+		return persona;
 	}
 
 	public List<Persona> finAllPersonas() {
